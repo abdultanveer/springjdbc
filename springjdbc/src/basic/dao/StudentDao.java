@@ -9,7 +9,8 @@ public interface StudentDao {
 	void insert(List<Student> students);
 	void delRecordById(int id);
 	int delRecordByNameORSem(String studentName, int sem);
-	public List<Student> getAllStudents();
+	List<Student> getAllStudents();
+	Student findStudentById(int id);
 
 
 }
