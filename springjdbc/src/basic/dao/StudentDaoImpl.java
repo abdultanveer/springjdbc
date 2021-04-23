@@ -1,5 +1,8 @@
 package basic.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +14,10 @@ import basic.model.Student;
 
 @Repository("studentDao")
 public class StudentDaoImpl  implements StudentDao{
-	
+
 	@Autowired
 	private JdbcTemplate jdbcTemplate ;
-	
+
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
@@ -54,7 +57,7 @@ public class StudentDaoImpl  implements StudentDao{
 		System.out.println("no of records deleted ="+ noRecordsDeleted);
 		return noRecordsDeleted;
 	}
-	
+
 	public void cleanUp() {
 		String sql = "TRUNCATE TABLE STUDENT";
 		jdbcTemplate.update(sql);
@@ -62,5 +65,20 @@ public class StudentDaoImpl  implements StudentDao{
 	}
 
 
-	
+
+
+	@Override
+	public void insert(List<Student> students) {
+		String sql = "INSERT INTO student VALUES (?,?,?,?)";
+		ArrayList<Object[]> sqlArgs = new ArrayList<>();
+		for(Student student : students) {
+			Object[] studentData =	{student.getId(),student.getName(),student.getSem(),student.getAverage()};
+			sqlArgs.add(studentData);
+		}
+		
+		jdbcTemplate.batchUpdate(sql, sqlArgs);
+	}
+
+
+
 }
