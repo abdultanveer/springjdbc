@@ -11,8 +11,9 @@ public class PlayJdbc {
 	public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		StudentDao studentDao = (StudentDao) context.getBean("studentDao");
-		studentDao.delRecordById(13);
+		//studentDao.delRecordById(13);
 		//insertStudent(studentDao);
+		studentDao.delRecordByNameSem("ansari", 5);
 	}
 
 	
