@@ -34,5 +34,15 @@ public class StudentDaoImpl  implements StudentDao{
 	}
 
 
+
+
+	@Override
+	public void delRecordById(int id) {
+		String delSql = "DELETE FROM STUDENT WHERE _id = ?";
+		int noRecordsDeleted = jdbcTemplate.update(delSql,id);
+		System.out.println("no of records deleted = "+ noRecordsDeleted);
+	}
+
+
 	
 }
